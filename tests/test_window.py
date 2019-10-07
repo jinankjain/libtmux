@@ -128,6 +128,15 @@ def test_split_window_horizontal(session):
     assert float(window.panes[0].width) <= ((float(window.width) + 1) / 2)
 
 
+def test_split_window_percent(session):
+    window_name = 'test split window'
+    window = session.new_window(window_name=window_name, attach=True)
+    pane = window.split_window(percent=50)
+    assert len(window.panes) == 2
+    assert isinstance(pane, Pane)
+    assert float(window.panes[0].width) == float(window.panes[1].width)
+
+
 @pytest.mark.parametrize(
     "window_name_before,window_name_after",
     [('test', 'ha ha ha fjewlkjflwef'), ('test', 'hello \\ wazzup 0')],
